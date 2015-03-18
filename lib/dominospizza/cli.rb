@@ -1,5 +1,5 @@
 require 'optparse'
-require 'ostruct'
+# require 'ostruct'
 
 module DominosPizza
   class CLI
@@ -14,8 +14,9 @@ module DominosPizza
       opt_parser = OptionParser.new do |opts|
         opts.banner = "Usage: dominospizza [-s zip street][-m store]"
 
-        opts.on( '-s', '--search ZIP_CODE STREET', Array, "Search for the store nearest to the zip code and street name" ) do|l|
-          options[:list] = l
+        opts.on("-s", '--search [ZIP, "STREET NAME"]', Array, "Search for the store nearest to the zip code and street name" ) do|list|
+          puts DominosPizza::WebService.download_store_data(zip:list[0], street:list[1])
+          options[:list] = list
         end
 
         # Required: zip code

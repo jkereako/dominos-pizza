@@ -1,16 +1,20 @@
+require "net/http"
+
 module DominosPizza
   module WebService
+    module_function
+
     API_URL = "https://order.dominos.com/power/"
     PIZZA_TRACKER_URL = "https://trkweb.dominos.com/orderstorage/GetTrackerData?"
 
     attr_reader :uri
 
-    def download_store_data(street, zip)
-      uri = URI(API_URL)
+    def download_store_data(street:, zip:)
+      uri = URI(API_URL + "store-locator")
       uri.query = URI.encode_www_form({:s => street, :c => zip})
 
       response = Net::HTTP.get_response(uri)
-
+      puts uri
       response.body if response.is_a?(Net::HTTPSuccess)
     end
 
