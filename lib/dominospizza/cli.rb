@@ -39,13 +39,11 @@ module DominosPizza
         # Try it and see!
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
-          exit
         end
 
         # Another typical switch to print the version.
         opts.on_tail("--version", "Show version") do
           puts DominosPizza::VERSION.dup
-          exit
         end
       end
 
