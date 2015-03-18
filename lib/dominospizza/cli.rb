@@ -1,5 +1,5 @@
 require 'optparse'
-# require 'ostruct'
+require 'ostruct'
 
 module DominosPizza
   class CLI
