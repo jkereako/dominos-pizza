@@ -14,7 +14,7 @@ module DominosPizza
       uri.query = URI.encode_www_form({:s => street, :c => zip})
 
       response = Net::HTTP.get_response(uri)
-      puts uri
+      
       response.body if response.is_a?(Net::HTTPSuccess)
     end
 
