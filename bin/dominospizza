@@ -2,4 +2,6 @@
 
 require "dominospizza"
 
+# To test in the command line:
+# ruby -Ilib ./bin/dominospizza -h
 DominosPizza::CLI.parse(ARGV)

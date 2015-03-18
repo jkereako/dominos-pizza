@@ -12,28 +12,19 @@ module DominosPizza
       options.verbose = false
 
       opt_parser = OptionParser.new do |opts|
-        opts.banner = "Usage: dominos-pizza [options]"
+        opts.banner = "Usage: dominospizza [-s zip street][-m store]"
 
-        opts.separator ""
-        opts.separator "Required arguments:"
-
-        # Required: street name
-        opts.on("-s", "--street STREET", "Your street name") do |street|
-          options.street = street
+        opts.on( '-s', '--search ZIP_CODE STREET', Array, "Search for the store nearest to the zip code and street name" ) do|l|
+          options[:list] = l
         end
 
         # Required: zip code
-        opts.on("-z", "--zip ZIP CODE", "Your zip code") do |zip|
+        opts.on("-m", "--menu STORE_ID", "View the menu of a particular store") do |zip|
           options.zip = zip
         end
 
         opts.separator ""
         opts.separator "Common options:"
-
-        # Boolean switch.
-        opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
-          options.verbose = v
-        end
 
         # No argument, shows at tail.  This will print an options summary.
         # Try it and see!
@@ -48,7 +39,7 @@ module DominosPizza
       end
 
       opt_parser.parse!(args)
-      options
+
     end  # parse()
 
   end  # class OptparseExample
