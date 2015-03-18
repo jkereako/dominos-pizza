@@ -1,5 +1,6 @@
 require "optparse"
 require "ostruct"
+require "pp"
 
 module DominosPizza
   class CLI
@@ -17,7 +18,13 @@ module DominosPizza
         opts.on("-s", '--search [ZIP, "STREET NAME"]', Array, "Search for the store nearest to the zip code and street name" ) do|list|
           data = DominosPizza::WebService.download_store_data(zip:list[0], street:list[1])
 
-          puts DominosPizza::Parser.parse_store_data(json:data)
+          DominosPizza::Parser.parse_store_data(json:data).each do |store|
+            store.each do |key, value|
+              puts "  #{key}: #{value}"
+            end
+            puts "  ----------------------------------------"
+          end
+
           options[:list] = list
         end
 

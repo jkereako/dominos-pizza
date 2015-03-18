@@ -10,10 +10,18 @@ module DominosPizza
 
       stores = Array.new
       store_data["Stores"].each do |store|
+        # Filter the object leaving only the keys we require
         filtered_data = store.select do |key, value|
           ["StoreID", "Phone", "AddressDescription", "ServiceHoursDescription"].include?(key)
         end
-        stores.push(filtered_data)
+
+        # Rename the keys so they are all ready to print to stdout
+        mappings = {"StoreID" => "Store #",
+                    "Phone" => "Phone",
+                    "AddressDescription" => "Location",
+                    "ServiceHoursDescription" =>"Hours"}
+
+        stores.push(Hash[filtered_data.map {|k, v| [mappings[k], v] }])
       end
 
       stores
