@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "dominospizza"
+require 'dominospizza'
 
 # To test in the command line:
 # ruby -Ilib ./bin/dominospizza -h

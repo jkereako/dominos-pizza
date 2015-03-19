@@ -1,4 +1,4 @@
-require "dominospizza/version"
-require "dominospizza/web_service"
-require "dominospizza/parser"
-require "dominospizza/cli"
+require 'dominospizza/version'
+require 'dominospizza/web_service'
+require 'dominospizza/parser'
+require 'dominospizza/cli'
