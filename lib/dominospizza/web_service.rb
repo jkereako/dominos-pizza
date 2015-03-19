@@ -9,21 +9,28 @@ module DominosPizza
 
     attr_reader :uri
 
-    def download_store_data(street:, zip:)
+    def get_stores(street:, zip:)
       uri = URI(API_URL + "store-locator")
       uri.query = URI.encode_www_form({:s => street, :c => zip})
 
       response = Net::HTTP.get_response(uri)
-      
+
       response.body if response.is_a?(Net::HTTPSuccess)
     end
 
-    def download_store_menu(store_id)
-      uri = URI(API_URL + "store#{store_id}/menu")
-      uri.query = URI.encode_www_form({:lang => "en", :structured => True})
+    def get_store(store_id:)
+      uri = URI(API_URL + "store/#{store_id}/profile")
 
       response = Net::HTTP.get_response(uri)
+      response.body if response.is_a?(Net::HTTPSuccess)
+    end
 
+    # This downloads an eff-load of data
+    def get_store_menu(store_id:)
+      uri = URI(API_URL + "store/#{store_id}/menu")
+      uri.query = URI.encode_www_form({:lang => "en", :structured => true})
+
+      response = Net::HTTP.get_response(uri)
       response.body if response.is_a?(Net::HTTPSuccess)
     end
 
